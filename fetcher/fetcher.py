@@ -3,6 +3,11 @@ from pymongo import MongoClient
 import datetime
 import json
 
+def handle(event, context):
+    print("hello man")
+    return None
+
+"""
 # dirty stuff, move into .env
 dbuser = ''
 dbpassword = ''
@@ -40,4 +45,4 @@ for repo in response:
 print("started insert")
 collection.insert_one(day_item)
 print("finished insert")
-
+"""
