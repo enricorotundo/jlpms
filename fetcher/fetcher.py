@@ -1,48 +1,65 @@
-from github import Github
-from pymongo import MongoClient
 import datetime
 import json
+import os
+import logging
+
+from github import Github
+from pymongo import MongoClient
+from dotenv import load_dotenv
+
+# logging setup
+logger = logging.getLogger('fetcher.py')
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
+# load .env
+load_dotenv(dotenv_path='.env')
+db_user = os.getenv("DB_USER")
+db_password = os.getenv("DB_PWD")
+conn_string = os.getenv("MONGO_CONN_STR").format(db_user, db_password)
+github_access_token = os.getenv("GITHUB_TOKEN")
 
 def handle(event, context):
-    print("hello man")
-    return None
+    logger.info('Got event {}'.format(event))
 
-"""
-# dirty stuff, move into .env
-dbuser = ''
-dbpassword = ''
-conn_string = "".format(dbuser, dbpassword)
-github_access_token = ""
+    # db
+    client = MongoClient(conn_string)
+    db = client['jlpms']
+    collection = db['items']
 
+    # github
+    query = "topic:jupyterlab-extension"
+    g = Github(github_access_token)
+    response = g.search_repositories(query=query)
 
-client = MongoClient(conn_string)
-
-
-db = client['jlpms']
-collection = db['raw_items']
-
-
-g = Github(github_access_token)
-query = "topic:jupyterlab-extension"
-response = g.search_repositories(query=query)
-
-
-
-day_item = {
-    "date": datetime.date.today().isoformat(),
-    "items": []
-}
-
-
-
-for repo in response:
-    #print(repo.id)
-    day_item["items"].append(repo.raw_data)
-
+    items = []
+    for repo in response:
+        logger.debug("repository id:{}".format(repo.raw_data["id"]))
+        items.append(repo.raw_data)
     
+    modified_count = 0
+    upserted_count = 0
+    for document in items:
+        logger.debug("updating id:{}".format(document["id"]))
+        try:
+            update_res = collection.update_one({"id": document["id"]}, {"$set": document}, upsert=True)
+            modified_count += update_res.modified_count
+            if update_res.upserted_id:
+                upserted_count += 1
+        except Exception as e:
+            logger.error("document id:{} caused: {}".format(document["id"], e))
+    
+    summary_str = '{} items, upserted {}, modified {}'.format(len(items), upserted_count, modified_count)
+    logger.info(summary_str)
 
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Success! ' + summary_str)
+    }
 
-print("started insert")
-collection.insert_one(day_item)
-print("finished insert")
-"""
+if __name__ == "__main__":
+    print(handle(None, None))
