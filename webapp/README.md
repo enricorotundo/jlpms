@@ -9,3 +9,15 @@
   "API_URL": "localhost:3000"
 }
 ```
+
+## Install dev deps
+
+```
+npm i
+```
+
+## Development
+
+```
+npm start
+```
