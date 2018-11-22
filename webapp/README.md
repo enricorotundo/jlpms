@@ -6,11 +6,11 @@
 
 ```
 {
-  "API_URL": "localhost:3000"
+  "API_URL": "http://localhost:3000/v1"
 }
 ```
 
-## Install dev deps
+## Install deps
 
 ```
 npm i
