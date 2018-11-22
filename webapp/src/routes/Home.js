@@ -1,5 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import MyComponent from '../components/MyComponent';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import MostRecentPackages from '../components/MostRecentPackages';
+
+const styles = theme => ({
+
+});
 
 class Home extends Component {
   constructor() {
@@ -7,11 +13,16 @@ class Home extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return <Fragment>
-      <h1>home</h1>
-      <MyComponent />
+      <Grid container className={classes.tableContainer}>
+        <Grid item>
+          <MostRecentPackages />
+        </Grid>
+      </Grid>
     </Fragment>;
   }
 }
 
-export default Home;
+export default withStyles(styles)(Home);
