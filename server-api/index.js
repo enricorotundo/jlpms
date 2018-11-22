@@ -11,6 +11,7 @@ const router = new Router();
 router.prefix('/v1');
 router.get('/ping', routes.ping);
 router.get('/repo/:id', routes.findById);
+router.get('/repos', routes.findRepos);
 
 app.use(cors({ origin: '*' }));
 app.use(compress()); // compress has to stay before routes

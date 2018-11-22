@@ -9,3 +9,18 @@ module.exports.findById = async (ctx, next) => {
   if (!Number(params.id)) ctx.throw(422, 'id has to be a number');
   ctx.body = await items.findOne({ id: Number(params.id) });
 };
+
+module.exports.findRepos = async (ctx, next) => {
+  const qs = ctx.query;
+  const limit = parseInt(qs.limit) > 0 ? parseInt(qs.limit) : 10;
+  // 1 or -1
+  const sort = Math.abs(parseInt(qs.sort)) === 1 ? parseInt(qs.sort) : null;
+  const sortBy = qs.sortBy || '_id';
+
+  const options = {};
+  options.fields = { _id: 0 };
+  options.limit = limit;
+  if (sort) options.sort = { [sortBy]: sort };
+
+  ctx.body = await items.find({}, options);
+}
