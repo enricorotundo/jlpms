@@ -45,7 +45,6 @@ def handle(event, context):
 
     # unravel github response into separate documents 
     items = []
-    #TODO remove 10 items limit!
     for repo in response:
         logger.debug("repository id:{}".format(repo.raw_data["id"]))
         items.append(repo.raw_data)
@@ -62,13 +61,6 @@ def handle(event, context):
             modified_count += update_res.modified_count
             if update_res.upserted_id:
                 upserted_count += 1
-
-            """
-            TODO
-            1) change update_one with https://docs.mongodb.com/manual/reference/command/findAndModify/
-            2) pass mongo's "_id" to algolia "objectID" (https://www.algolia.com/doc/api-reference/api-methods/add-objects/)
-            3) redeploy lambda
-            """
 
             # push data onto algolia
             filtered_document = { key:value for key,value in document.items() if key in filter_keys}
