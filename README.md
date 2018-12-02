@@ -7,13 +7,22 @@
 ## Components
 
 * database (mlab)
-* Fetcher (python - aws lambda)
+* lambdas
+    * fetcher (python - aws lambda)
+    * readme (python - aws lambda)
 * server-api (node.js)
 * webapp (React)
 
 ## Database
 
-* mongo v3.6.8 
+* version: mongo v3.6.8 
 * name: `jlpms`
 * collections:
-    * `items`: indexed attribs `_id`, `id`
+    * `items`
+        * Descr: repositories pulled from GitHub 
+        * Indexes: `_id`, `id`
+    * `readmes`
+        * Descr: 
+            * responses from [get the readme](https://developer.github.com/v3/repos/contents/#get-the-readme) endpoint
+            * raw readme content from `download_url`
+        * Indexes: `_id`, `id`
