@@ -5,6 +5,7 @@
 
 ## Development environment
 
+1. Move into function directory
 1. Create local virtualenv in `venv`
 2. `source venv/bin/activate`
 3. Check if it's correctly activated `which python` should output `REPO_PATH/fetcher/venv/bin/python`
