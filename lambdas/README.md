@@ -3,7 +3,7 @@
 * Python 3.6
 * virtualenv (needed for AWS Lambda deployment)
 
-## Development environment
+## (Development environment (local)
 
 1. Move into function directory
 1. Create local virtualenv in `venv`
@@ -12,3 +12,9 @@
 4. `pip install -r requirements.txt`
 
 If venv is avilable, just run (2).
+
+## Create
+
+```
+bash ./build_lambda_package.sh LAMBDA_DIR_NAME
+```
