@@ -6,7 +6,7 @@
   "scripts": {
     "build.prod": "webpack --config webpack.prod.js",
     "build.stag": "webpack --config webpack.stag.js",
-    "start.local": "npm run build.prod && node index.js",
+    "start.local": "npm run build.stag && NODE_ENV=staging node index.js",
     "dev": "webpack-dev-server --open --config webpack.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +33,7 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "express": "^4.16.4",
+    "prerender-node": "^3.2.1",
     "react-cookie": "^3.0.4",
     "serve-static": "^1.13.2"
   }
