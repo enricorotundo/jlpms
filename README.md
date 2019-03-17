@@ -11,7 +11,9 @@
     * fetcher (python - aws lambda)
     * readme (python - aws lambda)
 * server-api (node.js)
-* webapp (React)
+* webapp (React with dedicated express static server + prerender middleware)
+* prerender ([Prerender](https://github.com/prerender/prerender) server)
+
 
 ## Database
 
