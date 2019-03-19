@@ -19,5 +19,5 @@ npm i
 ## Development
 
 ```
-npm start
+npm run dev
 ```
