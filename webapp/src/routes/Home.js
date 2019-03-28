@@ -37,7 +37,7 @@ class Home extends Component {
           apiKey="cc8135b4e1abb63101b50c0b5d606676"
           indexName="dev_jlpms"
         >
-        <Configure hitsPerPage={10} />
+        <Configure hitsPerPage={12} />
           <Grid item className={classes.searchContainer}>
             <SearchBox />
           </Grid>
