@@ -18,7 +18,10 @@ function Hit({ hit }) {
     <span className="hit-name">
       <Highlight attribute="full_name" hit={hit} />
     </span>
-    <Highlight attribute="description" hit={hit} />
+    <p><Highlight attribute="description" hit={hit} /></p>
+    <p><Highlight attribute="owner.login" hit={hit} /></p>
+    <p><Highlight attribute="updated_at" hit={hit} /></p>
+    <p><Highlight attribute="stargazers_count" hit={hit} /></p>
   </div>);
 }
 
