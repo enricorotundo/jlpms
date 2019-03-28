@@ -2,11 +2,22 @@ import datetime
 import json
 import os
 import logging
+import collections
 
 from github import Github
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from algoliasearch import algoliasearch
+
+def flatten(d, parent_key='', sep='.'):
+    items = []
+    for k, v in d.items():
+        new_key = parent_key + sep + k if parent_key else k
+        if isinstance(v, collections.MutableMapping):
+            items.extend(flatten(v, new_key, sep=sep).items())
+        else:
+            items.append((new_key, v))
+    return dict(items)
 
 # logging setup
 logger = logging.getLogger(__file__)
@@ -52,7 +63,7 @@ def handle(event, context):
     modified_count = 0
     upserted_count = 0
     # document keys to be pushed onto search index
-    filter_keys = ["id", "full_name", "description"]
+    filter_keys = ["id", "full_name", "description", "stargazers_count", "updated_at", "owner.login"]
     for document in items:
         logger.debug("updating id:{}".format(document["id"]))
         try:
@@ -63,7 +74,7 @@ def handle(event, context):
                 upserted_count += 1
 
             # push data onto algolia
-            filtered_document = { key:value for key,value in document.items() if key in filter_keys}
+            filtered_document = { key:value for key,value in flatten(document).items() if key in filter_keys}
             res = index.add_object(filtered_document)
             logger.debug("Algolia response for {} is: {}".format(document["id"], res))
         except Exception as e:
