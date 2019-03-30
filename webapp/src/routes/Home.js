@@ -14,12 +14,16 @@ const styles = theme => ({
 });
 
 function Hit({ hit }) {
-  return (<div style={{ marginTop: '10px' }}>
-    <span className="hit-name">
-      <Highlight attribute="full_name" hit={hit} />
-    </span>
-    <Highlight attribute="description" hit={hit} />
-  </div>);
+  return (
+    <a href={ `/package/${hit.id}` }>
+      <div style={{ marginTop: '10px' }}>
+        <span className="hit-name">
+          <Highlight attribute="full_name" hit={hit} />
+        </span>
+        <Highlight attribute="description" hit={hit} />
+      </div>
+    </a>
+  );
 }
 
 class Home extends Component {

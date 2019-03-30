@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CookiesProvider } from 'react-cookie';
 import Home from './routes/Home';
+import Package from './routes/Package';
 import NotFound from './routes/NotFound';
 import MainBar from './components/MainBar';
 import themeFactory from './themeFactory';
@@ -18,7 +19,7 @@ const App = () => (
           <MainBar />
           <Switch>
             <Route exact path="/" component={Home} />
-            {/* <Route path="/otherpath" component={OtherComponent} /> */}
+            <Route path="/package/:id" component={Package} />
             <Route component={NotFound} />
           </Switch>
         </Fragment>
