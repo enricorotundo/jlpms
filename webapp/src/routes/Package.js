@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import StarIcon from '@material-ui/icons/Star';
+import Markdown from 'markdown-to-jsx';
 import { InstantSearch, Hits, SearchBox, Highlight, Configure } from 'react-instantsearch-dom';
 import APIGateway from '../APIGateway';
 
@@ -36,7 +37,7 @@ class Package extends Component {
         updated_at: ''
       },
       readme: {
-        raw: ''
+        raw: 'Loading...'
       }
     });
   }
@@ -46,7 +47,9 @@ class Package extends Component {
     const readmeRes = await APIGateway.getReadme({ id: this.state.packageId });
     this.setState({
       package: packageRes.data,
-      readme: readmeRes.data
+      readme: {
+        raw: readmeRes.data.raw || 'Readme not found'
+      }
     });
   }
 
@@ -54,6 +57,7 @@ class Package extends Component {
     const { classes } = this.props;
     const { name, owner, stargazers_count, updated_at } = this.state.package;
     const { raw } = this.state.readme;
+    console.log('raw', raw)
 
     return <Fragment>
       <Grid container className={classes.root}>
@@ -76,7 +80,7 @@ class Package extends Component {
           </Typography>
         </Grid>
         <Grid item xs={12} className={classes.readme}>
-          { raw }
+          <Markdown>{ raw }</Markdown>
         </Grid>
       </Grid>
     </Fragment>;
