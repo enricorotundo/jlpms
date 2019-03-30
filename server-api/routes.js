@@ -1,5 +1,6 @@
 const db = require('monk')(process.env.MONGODB_URI);
 const items = db.get('items');
+const readmes = db.get('readmes');
 
 module.exports.ping = async ctx => ctx.body = 'pong';
 
@@ -24,4 +25,12 @@ module.exports.findRepos = async (ctx, next) => {
   if (sort) options.sort = { [sortBy]: sort };
 
   ctx.body = await items.find({}, options);
+}
+
+module.exports.findReadmeById = async (ctx, next) => {
+  const qs = ctx.query;
+  const id = qs.id
+  if (!id) ctx.throw(422, 'id is required');
+  if (!Number(id)) ctx.throw(422, 'id has to be a number');
+  ctx.body = await readmes.findOne({ id: Number(id) });
 }

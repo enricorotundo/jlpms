@@ -11,6 +11,7 @@ const router = new Router();
 router.prefix('/v1');
 router.get('/ping', routes.ping);
 router.get('/package', routes.findById);
+router.get('/readme', routes.findReadmeById);
 router.get('/repos', routes.findRepos);
 
 app.use(cors({ origin: '*' }));

@@ -9,6 +9,14 @@ class APIGateway {
   static getRepos(params) {
     return httpClient.get('/repos', { params });
   }
+
+  static getPackage(params) {
+    return httpClient.get('/package', { params });
+  }
+
+  static getReadme(params) {
+    return httpClient.get('/readme', { params });
+  }
 }
 
 export default APIGateway;
