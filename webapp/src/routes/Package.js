@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import StarIcon from '@material-ui/icons/Star';
+import BookIcon from '@material-ui/icons/ChromeReaderModeOutlined';
 import Markdown from 'markdown-to-jsx';
 import { InstantSearch, Hits, SearchBox, Highlight, Configure } from 'react-instantsearch-dom';
 import APIGateway from '../APIGateway';
@@ -81,6 +82,7 @@ class Package extends Component {
           </Typography>
         </Grid>
         <Grid item xs={12} className={classes.readme}>
+          <BookIcon /> README.md
           <Markdown>{ raw }</Markdown>
         </Grid>
       </Grid>
