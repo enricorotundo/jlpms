@@ -63,27 +63,31 @@ class Package extends Component {
 
     return <Fragment>
       <Grid container className={classes.root}>
-        <Grid item xs={12} className={classes.head}>
-          <Typography variant="h4" className={classes.name}>
-            <a href={"https://github.com/" + owner.login + "/" + name}>{ name }</a>
-          </Typography>
-          <div>
-            <Typography variant="h4" className={classes.stargazersCount}>
-              { stargazers_count }<StarIcon />
+        <Grid container className={classes.top}>
+          <Grid item xs={12} className={classes.head}>
+            <Typography variant="h4" className={classes.name}>
+              <a href={"https://github.com/" + owner.login + "/" + name}>{ name }</a>
             </Typography>
-          </div>
+            <div>
+              <Typography variant="h4" className={classes.stargazersCount}>
+                { stargazers_count }<StarIcon />
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} className={classes.head}>
+            <Typography variant="h5" className={classes.ownerLogin}>
+              <a href={"https://github.com/" + owner.login }>{ owner.login }</a>
+            </Typography>
+            <Typography variant="h5" className={classes.updatedAt}>
+              Last update: <Moment fromNow>{ updated_at }</Moment>
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item xs={12} className={classes.head}>
-          <Typography variant="h5" className={classes.ownerLogin}>
-            <a href={"https://github.com/" + owner.login }>{ owner.login }</a>
-          </Typography>
-          <Typography variant="h5" className={classes.updatedAt}>
-            Last update: <Moment fromNow>{ updated_at }</Moment>
-          </Typography>
-        </Grid>
-        <Grid item xs={12} className={classes.readme}>
-          <BookIcon /> README.md
-          <Markdown>{ raw }</Markdown>
+        <Grid container justify="center" alignItems="column" className={classes.body}>
+          <Grid item xs={10} sm={8} className={classes.readme}>
+            <BookIcon /> README.md
+            <Markdown>{ raw }</Markdown>
+          </Grid>
         </Grid>
       </Grid>
     </Fragment>;
