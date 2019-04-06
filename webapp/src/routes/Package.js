@@ -7,6 +7,7 @@ import StarIcon from '@material-ui/icons/Star';
 import Markdown from 'markdown-to-jsx';
 import { InstantSearch, Hits, SearchBox, Highlight, Configure } from 'react-instantsearch-dom';
 import APIGateway from '../APIGateway';
+import Moment from 'react-moment';
 
 
 const styles = theme => ({
@@ -63,7 +64,7 @@ class Package extends Component {
       <Grid container className={classes.root}>
         <Grid item xs={12} className={classes.head}>
           <Typography variant="h4" className={classes.name}>
-            { name }
+            <a href={"https://github.com/" + owner.login + "/" + name}>{ name }</a>
           </Typography>
           <div>
             <Typography variant="h4" className={classes.stargazersCount}>
@@ -76,7 +77,7 @@ class Package extends Component {
             <a href={"https://github.com/" + owner.login }>{ owner.login }</a>
           </Typography>
           <Typography variant="h5" className={classes.updatedAt}>
-            { updated_at }
+            Last update: <Moment fromNow>{ updated_at }</Moment>
           </Typography>
         </Grid>
         <Grid item xs={12} className={classes.readme}>
