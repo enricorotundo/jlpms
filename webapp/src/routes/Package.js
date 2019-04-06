@@ -73,7 +73,7 @@ class Package extends Component {
         </Grid>
         <Grid item xs={12} className={classes.head}>
           <Typography variant="h5" className={classes.ownerLogin}>
-            { owner.login }
+            <a href={"https://github.com/" + owner.login }>{ owner.login }</a>
           </Typography>
           <Typography variant="h5" className={classes.updatedAt}>
             { updated_at }
