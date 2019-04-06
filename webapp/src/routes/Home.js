@@ -17,10 +17,12 @@ function Hit({ hit }) {
   return (
     <a href={ `/package/${hit.id}` }>
       <div style={{ marginTop: '10px' }}>
-        <span className="hit-name">
+        <p className="hit-name">
           <Highlight attribute="full_name" hit={hit} />
-        </span>
-        <Highlight attribute="description" hit={hit} />
+        </p>
+        <p className="hit-descr">
+          <Highlight attribute="description" hit={hit} />
+        </p>
       </div>
     </a>
   );
