@@ -50,7 +50,7 @@ class Package extends Component {
     this.setState({
       package: packageRes.data,
       readme: {
-        raw: readmeRes.data.raw || 'Readme not found'
+        raw: readmeRes.data.raw || 'ERROR: No README.md file found!'
       }
     });
   }
@@ -84,8 +84,10 @@ class Package extends Component {
           </Grid>
         </Grid>
         <Grid container justify="center" alignItems="column" className={classes.body}>
-          <Grid item xs={10} sm={8} className={classes.readme}>
-            <BookIcon /> README.md
+          <Grid item xs={12} className={classes.readme}>
+            <Typography variant="h6">
+              <BookIcon /> README.md
+            </Typography>
             <Markdown>{ raw }</Markdown>
           </Grid>
         </Grid>
