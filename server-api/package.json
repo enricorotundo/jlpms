@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy.heroku.staging": "git push heroku-staging master",
     "dev": "nodemon -r dotenv/config index.js",
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
