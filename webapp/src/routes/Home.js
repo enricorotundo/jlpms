@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import StarIcon from '@material-ui/icons/Star';
 import { InstantSearch, Hits, SearchBox, Highlight, Configure } from 'react-instantsearch-dom';
 import MostRecentPackages from '../components/MostRecentPackages';
-import MadeWithLove from 'react-made-with-love';
+// import MadeWithLove from 'react-made-with-love';
 
 const styles = theme => ({
   instantSearchContainer: {
@@ -57,14 +57,14 @@ class Home extends Component {
           </Grid>
         </InstantSearch>
       </Grid>
-      <Grid container justify="center" direction="row" className={classes.footer}>
+      {/* <Grid container justify="center" direction="row" className={classes.footer}>
         <Grid item className={classes.love}>
           <MadeWithLove
             by="gfornari & enricorotundo"
             emoji
           />
         </Grid>
-      </Grid>
+      </Grid> */}
     </Fragment>;
   }
 }
